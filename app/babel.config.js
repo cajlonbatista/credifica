@@ -12,5 +12,5 @@ module.exports = {
             },
             "inline-svg-react"
         ]
-    ]
+    ],
 }

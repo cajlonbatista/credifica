@@ -10,11 +10,17 @@
   "dependencies": {
     "@types/node": "^14.14.21",
     "@types/react": "^17.0.0",
+    "babel-plugin-inline-react-svg": "^1.1.2",
     "inline-svg-react": "^0.2.0",
+    "mongoose-paginate": "^5.0.3",
     "next": "10.0.5",
     "next-images": "^1.6.2",
+    "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.2.1",
     "typescript": "^4.1.3"
   },
@@ -30,6 +36,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="72.744" height="87.564" viewBox="0 0 72.744 87.564">
+	<defs>
+		<style>
+			.a{fill:#228a95;}.b{fill:#fff;font-size:63px;font-family:SegoeUIBlack, Segoe UI;}.c{filter:url(#a);}
+		</style>
+		<filter id="a" x="0" y="14.82" width="72.744" height="72.744" filterUnits="userSpaceOnUse">
+			<feOffset dy="1" input="SourceAlpha" />
+			<feGaussianBlur stdDeviation="1" result="b" />
+			<feFlood flood-opacity="0.161" />
+			<feComposite operator="in" in2="b" />
+			<feComposite in="SourceGraphic" />
+		</filter>
+	</defs>
+	<g transform="translate(-347.365 -102.18)">
+		<g class="c" transform="matrix(1, 0, 0, 1, 347.37, 102.18)">
+			<rect class="a" width="66.744" height="66.744" rx="30" transform="translate(3 16.82)" />
+		</g>
+		<text class="b" transform="translate(360.827 170.18)">
+			<tspan x="0" y="0">
+				+
+			</tspan>
+		</text>
+	</g>
+</svg>
