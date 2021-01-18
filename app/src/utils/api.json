@@ -1,64 +1,61 @@
 {
-  "rateTable": [
-    {
-      "id": 1,
-      "name": "Segundo plano",
-      "installments": [
-        {
-          "id": 1,
-          "installments": 1,
-          "installmentInterest": 100,
-          "installmentValue": 444.00,
-          "fullValue": 444.00,
-          "comission": 1.5
+    "rateTable": [{
+            "id": 1,
+            "name": "Primeiro plano",
+            "installments": [{
+                    "id": 1,
+                    "installments": 1,
+                    "installmentInterest": 100,
+                    "installmentValue": 444.00,
+                    "fullValue": 444.00,
+                    "comission": 1.5
+                },
+                {
+                    "id": 2,
+                    "installments": 2,
+                    "installmentInterest": 20.5,
+                    "installmentValue": 1338.76,
+                    "fullValue": 2677.51,
+                    "comission": 3
+                },
+                {
+                    "id": 2,
+                    "installments": 3,
+                    "installmentInterest": 20.5,
+                    "installmentValue": 1338.76,
+                    "fullValue": 2677.51,
+                    "comission": 4.5
+                }
+            ]
         },
         {
-          "id": 2,
-          "installments": 2,
-          "installmentInterest": 20.5,
-          "installmentValue": 1338.76,
-          "fullValue": 2677.51,
-          "comission": 3
-        },
-        {
-          "id": 2,
-          "installments": 3,
-          "installmentInterest": 20.5,
-          "installmentValue": 1338.76,
-          "fullValue": 2677.51,
-          "comission": 4.5
-        }  
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Primeiro plano",
-      "installments": [
-        {
-          "id": 1,
-          "installments": 1,
-          "installmentInterest": 100,
-          "installmentValue": 444.00,
-          "fullValue": 444.00,
-          "comission": 1
-        },
-        {
-          "id": 2,
-          "installments": 2,
-          "installmentInterest": 20.5,
-          "installmentValue": 1338.76,
-          "fullValue": 2677.51,
-          "comission": 2
-        },
-        {
-          "id": 3,
-          "installments": 3,
-          "installmentInterest": 20.5,
-          "installmentValue": 1338.76,
-          "fullValue": 2677.51,
-          "comission": 3
-        } 
-      ]
-    }
-  ]
+            "id": 2,
+            "name": "Segundo plano",
+            "installments": [{
+                    "id": 1,
+                    "installments": 1,
+                    "installmentInterest": 100,
+                    "installmentValue": 444.00,
+                    "fullValue": 444.00,
+                    "comission": 1
+                },
+                {
+                    "id": 2,
+                    "installments": 2,
+                    "installmentInterest": 20.5,
+                    "installmentValue": 1338.76,
+                    "fullValue": 2677.51,
+                    "comission": 2
+                },
+                {
+                    "id": 3,
+                    "installments": 3,
+                    "installmentInterest": 20.5,
+                    "installmentValue": 1338.76,
+                    "fullValue": 2677.51,
+                    "comission": 3
+                }
+            ]
+        }
+    ]
 }

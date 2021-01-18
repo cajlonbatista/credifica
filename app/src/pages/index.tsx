@@ -1,21 +1,30 @@
 import React from 'react';
-import { NextPage } from 'next';
+import { InferGetStaticPropsType } from 'next';
 
-import { INITIAL} from '../store/store';
+import { APP, wrapper } from '../store/store';
+import { setUrl } from '../store/actions/actions';
 import { useSelector } from 'react-redux';
 
 import Header from '../components/Header/Header';
+import Steps from '../components/Steps/Steps';
 
 import { MainContainer } from '../styles/index.styles';
 
-const Home: NextPage = () => {
-  const { step } = useSelector<INITIAL, INITIAL>(state => state);
-  
+const Home = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { step, url } = useSelector<APP, APP>(state => state);
+
   return (
     <MainContainer>
-      <Header/>
+      <Header />
+      <Steps step={step} />
     </MainContainer>
   );
 }
+
+export const getStaticProps = wrapper.getStaticProps(
+  async ({ store }) => {       
+    store.dispatch(setUrl(process.env.URL_API, 'SET_URL'));
+  }
+);
 
 export default Home;

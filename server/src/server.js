@@ -15,6 +15,7 @@ mongoose.connect(`mongodb+srv://cajlonbatista:cajlon4321@spacenews.uyvba.mongodb
 
 require('./models/Clients');
 require('./models/Solicitation');
+require('./models/Models');
 
 app.use('/api', require('./routes/routes'));
 

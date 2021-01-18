@@ -7,6 +7,7 @@ export default createGlobalStyle`
     box-sizing: border-box,
   }
   body{
-    background: ${props => props.theme.colors.background}
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 `;

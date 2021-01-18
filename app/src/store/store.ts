@@ -1,21 +1,30 @@
+import { Context } from 'vm';
+
 import { createStore, AnyAction } from 'redux';
+import { createWrapper, HYDRATE, MakeStore } from 'next-redux-wrapper';
 
-import { MakeStore, createWrapper, Context, HYDRATE } from 'next-redux-wrapper';
-
-export interface INITIAL {
+export interface APP {
   step: Number;
   value: Number;
+  url: String;
 }
 
-const reducer = (state: INITIAL = { step: 1, value: 0 }, action: AnyAction) => {
+const INITIAL = {
+  step: 1,
+  value: 0,
+  url: null
+};
+
+const reducer = (state: APP = INITIAL, action: AnyAction) => {
   switch (action.type) {
     case HYDRATE:
       return { ...state, ...action.payload };
+    case 'SET_URL':
+      return { ...state, url: action.payload };
     default:
       return state;
   }
 };
+const makeStore: MakeStore<APP> = (context: Context) => createStore(reducer, INITIAL);
 
-const makeStore: MakeStore<INITIAL> = (context: Context) => createStore(reducer);
-
-export const wrapper = createWrapper<INITIAL>(makeStore, { debug: true });
+export const wrapper = createWrapper<APP>(makeStore, { debug: true });

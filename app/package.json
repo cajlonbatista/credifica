@@ -8,8 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/next-redux-wrapper": "^3.0.0",
     "@types/node": "^14.14.21",
     "@types/react": "^17.0.0",
+    "@types/react-redux": "^7.1.15",
+    "axios": "^0.21.1",
     "babel-plugin-inline-react-svg": "^1.1.2",
     "inline-svg-react": "^0.2.0",
     "mongoose-paginate": "^5.0.3",
@@ -18,9 +21,11 @@
     "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-input-mask": "^2.0.4",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1",
     "typescript": "^4.1.3"
   },
