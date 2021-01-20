@@ -1,30 +1,33 @@
-import React, { useState, FormEvent, useEffect } from 'react';
+import React, { useState, FormEvent } from 'react';
 
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { SimulTaxasContainer } from './styles';
+
+import { setDetails, setStep, setValue } from '../../store/actions/actions';
+import { useDispatch } from 'react-redux';
+
+import { SimulTaxasContainer, TableContainer } from './styles';
 
 import add from '../../assets/svg/add.svg';
 import box from '../../assets/svg/box.svg';
-import { APP } from '../../store/store';
 
-interface Table {
-  _id: string;
+export interface Table {
+  id: string;
   name: string;
   installments: [
     {
+      id: string,
       installments: number;
       installmentInterest: number;
       comission: number;
     }
   ]
 }
-interface TableSingle {
-  _id: string;
+export interface TableSingle {
+  id: string;
   name: string;
   installments: [
     {
-      _id: string,
+      id: string,
       installments: number;
       installmentInterest: number;
       comission: number;
@@ -43,9 +46,11 @@ const SimulTaxas = () => {
   const [detailSelected, setDetailSelected] = useState({
     installments: 0,
     value: 0,
+    name: '',
   });
 
-  const { url } = useSelector<APP, APP>(state => state);
+  const dispatch = useDispatch();
+
 
   const onGenerate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,13 +63,25 @@ const SimulTaxas = () => {
       if (price === 0) {
         setMessage('Digite um valor !');
       } else {
-        axios.get<Table[]>(`${url}/api/model`).then(res => {
+        axios.get<Table[]>(`api/tables`).then(res => {
           setModels([...res.data]);
           setGenerate(true);
+          dispatch(setValue(price, 'SET_VALUE'));
         });
       }
     }
   };
+
+  const advancedStep = () => {
+    if (tableSelected !== '' && selectedInstallment !== '') {
+      dispatch(setDetails({
+        id: tableSelected,
+        installmentId: selectedInstallment,
+      }, 'SET_DETAILS'));
+
+      dispatch(setStep(2, 'SET_STEP'));
+    }
+  }
 
   return (
     <SimulTaxasContainer>
@@ -87,7 +104,8 @@ const SimulTaxas = () => {
               setSelectedInstallment('');
               setDetailSelected({
                 installments: 0,
-                value: 0
+                value: 0,
+                name: ''
               });
               if (e.target.value !== null) {
                 setPrice(parseInt(e.target.value));
@@ -101,14 +119,19 @@ const SimulTaxas = () => {
       </form>
       {generate === true ? (
         <>
-          <article>
+          <TableContainer>
             {
               models.map((table: TableSingle) => (
-                <div key={table._id.toString()}>
+                <div key={table.id.toString()}>
                   <div>
                     <input type='radio' name='selection' onChange={e => {
                       setSelectedInstallment('');
-                      setTableSelected(table._id);
+                      setTableSelected(table.id);
+                      setDetailSelected({
+                        installments: 0,
+                        value: 0,
+                        name: table.name,
+                      });
                     }} />
                   </div>
                   <table>
@@ -124,39 +147,41 @@ const SimulTaxas = () => {
                     </tbody>
                     {
                       table.installments.map(installment => (
-                        (selectedInstallment == installment._id && tableSelected == table._id)
+                        (selectedInstallment == installment.id && tableSelected == table.id)
                           ?
-                          <tr style={{ background: '#EFDF4B56' }} key={installment._id} onClick={e => {
-                            if (tableSelected == table._id) {
-                              setSelectedInstallment(installment._id);
+                          <tr style={{ background: '#EFDF4B56' }} key={installment.id} onClick={e => {
+                            if (tableSelected == table.id) {
+                              setSelectedInstallment(installment.id);
                               setDetailSelected({
                                 installments: installment.installments,
                                 value: price + (price * (installment.comission / 100)),
+                                name: table.name,
                               });
                             }
                           }}>
                             <td>{installment.installments}</td>
                             <td>{installment.installmentInterest} %</td>
-                            <td>{(price / installment.installments).toFixed(2)}</td>
-                            <td>{price + (price * (installment.comission / 100))}</td>
-                            <td>{installment.comission} %</td>
+                            <td>{((price / installment.installments) + (price / installment.installments * (installment.comission / 100))).toFixed(2)}</td>
+                            <td>{(price + (price * (installment.comission / 100))).toFixed(2)}</td>
+                            <td>{(price * (installment.comission / 100)).toFixed(2)}</td>
                           </tr>
                           :
-                          <tr key={installment._id} onClick={e => {
-                            if (tableSelected == table._id) {
-                              setSelectedInstallment(installment._id);
+                          <tr key={installment.id} onClick={e => {
+                            if (tableSelected == table.id) {
+                              setSelectedInstallment(installment.id);
                               setDetailSelected({
                                 installments: installment.installments,
                                 value: price + (price * (installment.comission / 100)),
+                                name: table.name,
                               });
                             }
                           }
                           }>
                             <td>{installment.installments}</td>
                             <td>{installment.installmentInterest} %</td>
-                            <td>{(price / installment.installments).toFixed(2)}</td>
-                            <td>{price + (price * (installment.comission / 100))}</td>
-                            <td>{installment.comission} %</td>
+                            <td>{((price / installment.installments) + (price / installment.installments * (installment.comission / 100))).toFixed(2)}</td>
+                            <td>{(price + (price * (installment.comission / 100))).toFixed(2)}</td>
+                            <td>{(price * (installment.comission / 100)).toFixed(2)}</td>
                           </tr>
                       ))
                     }
@@ -164,8 +189,12 @@ const SimulTaxas = () => {
                 </div>
               ))
             }
-          </article>
+          </TableContainer>
           <footer>
+            <h1>Nome da Tabela: {detailSelected.name}</h1>
+            <h1>Parcelas: {detailSelected.installments}</h1>
+            <h1>Valor da Parcela: R$ {detailSelected.value}</h1>
+            <button onClick={advancedStep}>Avançar</button>
           </footer>
         </>
       ) : (
@@ -174,7 +203,5 @@ const SimulTaxas = () => {
     </SimulTaxasContainer>
   );
 };
-
-
 
 export default SimulTaxas;

@@ -41,7 +41,17 @@ const SolicitationSchema = new mongoose.Schema({
   rateTableId: {
     type: String,
     required: true,
-  }
+  },
+  status: {
+    type: String,
+    required: false,
+  },
+  assets: [
+    {
+      title: { type: String, required: true },
+      file: { type: String, required: true },
+    }
+  ],
 });
 
 SolicitationSchema.plugin(mongoosePaginate);

@@ -12,7 +12,7 @@ const translate = keyframes`
 `;
 
 export const HeaderContainer = styled.header`
-  min-height: 63px;
+  min-height: 59px;
   background-color: ${props => props.theme.colors.primary};
   animation: ${translate} 0.3s backwards;
   z-index: 10;

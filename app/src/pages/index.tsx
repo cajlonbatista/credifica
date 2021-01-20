@@ -11,7 +11,7 @@ import Steps from '../components/Steps/Steps';
 import { MainContainer } from '../styles/index.styles';
 
 const Home = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { step, url } = useSelector<APP, APP>(state => state);
+  const { step } = useSelector<APP, APP>(state => state);
 
   return (
     <MainContainer>

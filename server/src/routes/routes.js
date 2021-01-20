@@ -6,6 +6,7 @@ const solicitationController = require('../controllers/Solicitation');
 
 routes.post('/client', clientsController.create);
 routes.get('/client', clientsController.show);
+routes.get('/client/:cpf', clientsController.index);
 
 routes.post('/solicitation', solicitationController.create);
 
