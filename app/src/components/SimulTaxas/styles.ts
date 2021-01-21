@@ -65,6 +65,8 @@ export const SimulTaxasContainer = styled.main`
         font-size: 15px;
         margin-top: 20px;
         border-radius: 5px;
+        appearance: none;
+        -webkit-appearance: none;
         font-family: Noto Sans JP, sans-serif;
         border: 0px;
         color: ${props => props.theme.colors.text};

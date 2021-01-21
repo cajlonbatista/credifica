@@ -26,6 +26,15 @@ module.exports = {
       return res.status(401).json({ error: error.message });
     }
   },
+  async update(req, res) {
+    try {
+      const { cpf } = req.params;
+      const client = await Clients.findOneAndUpdate({cpf: cpf}, req.body, { new: true });
+      return res.status(200).json(client);
+    } catch (error) {
+      return res.status(401).json({ error: error.message });
+    }
+  },
   async index(req, res) {
     try {
       const { cpf } = req.params;

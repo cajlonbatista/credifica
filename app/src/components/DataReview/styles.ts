@@ -8,6 +8,7 @@ export const DataReviewContainer = styled.main`
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  animation: 1s ${surge} linear;
   label{
     font-family: Noto Sans JP, sans-serif;
     font-size: 14px;
@@ -39,7 +40,6 @@ export const DataReviewContainer = styled.main`
     align-items: center;
     div:first-child{
       display: flex;
-      animation: ${translate} 0.7s backwards;
       animation-delay: 0.3s;
       justify-content: center;
       align-items: center;

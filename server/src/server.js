@@ -15,7 +15,6 @@ mongoose.connect(`mongodb://127.0.0.1:27017/klutch`, {
 
 require('./models/Clients');
 require('./models/Solicitation');
-require('./models/Models');
 
 app.use('/api', require('./routes/routes'));
 

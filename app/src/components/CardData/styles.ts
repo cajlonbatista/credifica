@@ -86,7 +86,7 @@ export const CardContainer = styled.main`
           img{
             position: absolute;
             width: 40px;
-            right: 17%;
+            right: 23%;
             top: 11px;
             border-radius: 5px;
           }

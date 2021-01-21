@@ -8,14 +8,14 @@ import axios from 'axios';
 
 import { ConcluedContainer } from './styles';
 
-import wallet from '../../assets/svg/wallet.svg';
+import card from '../../assets/svg/card.svg';
 import add from '../../assets/svg/add.svg';
 import box from '../../assets/svg/box.svg';
 import { getValueInstallment, getValueTotalMoreComission } from '../../utils/functions/finances';
 
 const confirm = (
   <svg xmlns="http://www.w3.org/2000/svg" width="43.953" height="33.658" viewBox="0 0 43.953 33.658">
-    <path fill='#' d="M192.121,177.539l-3.592-3.694a.772.772,0,0,0-.572-.245.741.741,0,0,0-.572.245l-24.9,25.086-9.063-9.063a.789.789,0,0,0-1.143,0l-3.633,3.633a.813.813,0,0,0,0,1.163l11.43,11.43a3.615,3.615,0,0,0,2.388,1.163,3.788,3.788,0,0,0,2.368-1.123h.02l27.29-27.433a.873.873,0,0,0-.02-1.163Z" transform="translate(-148.4 -173.6)" />
+    <path fill='#228A95' d="M192.121,177.539l-3.592-3.694a.772.772,0,0,0-.572-.245.741.741,0,0,0-.572.245l-24.9,25.086-9.063-9.063a.789.789,0,0,0-1.143,0l-3.633,3.633a.813.813,0,0,0,0,1.163l11.43,11.43a3.615,3.615,0,0,0,2.388,1.163,3.788,3.788,0,0,0,2.368-1.123h.02l27.29-27.433a.873.873,0,0,0-.02-1.163Z" transform="translate(-148.4 -173.6)" />
   </svg>
 );
 
@@ -49,7 +49,7 @@ const Conclued = () => {
 
   useEffect(() => {
     if (loading === true) {
-      axios.get(`${url}api/solicitation/6008aef027fe6c2154194656`).then(async res => {
+      axios.get(`${url}api/solicitation/${currentSolicitation}`).then(async res => {
         setSolicitation(res.data);
         await axios.get(`${url}api/client/${res.data.clientId}`).then(res => {
           setUser(res.data);
@@ -97,7 +97,7 @@ const Conclued = () => {
               </div>
               <div>
                 <div>
-                  <img src={wallet} alt='Wallet' />
+                  <img src={card} alt='Wallet' />
                   <h3>{solicitation.cardDetails.number}</h3>
                 </div>
                 <div>

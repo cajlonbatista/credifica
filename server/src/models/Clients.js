@@ -24,6 +24,9 @@ const Clients = new mongoose.Schema({
     label: {
       type: String,
     },
+    accountAgent: {
+      type: String,
+    },
     accountTypeLabel: {
       type: String,
     },

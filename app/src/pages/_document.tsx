@@ -45,7 +45,8 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <title>Klutch</title>
-          <link rel="preconnect" href="https://fonts.gstatic.com"/>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <meta name="viewport" content="initial-scale=1, maximum-scale=0.9"/>
           <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
         </Head>
         <body>

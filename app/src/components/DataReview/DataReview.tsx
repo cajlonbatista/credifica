@@ -5,15 +5,18 @@ import { APP } from '../../store/store';
 import { Table } from '../SimulTaxas/SimulTaxas';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentSolicitation, setStep, setTypeContract } from '../../store/actions/actions';
+import { getValueComission, getValueInstallment, getValueTotalMoreComission } from '../../utils/functions/finances';
+
+import { Spin } from 'antd';
 
 import { DataReviewContainer } from './styles';
 
 import confirm from '../../assets/svg/confirm.svg';
 import add from '../../assets/svg/add.svg';
 import box from '../../assets/svg/box.svg';
-import { getValueComission, getValueInstallment, getValueTotalMoreComission } from '../../utils/functions/finances';
 
 const DataReview = () => {
+  const [loading, setLoading] = useState(false);
   const [btnAutoStyles, setBtnAutoStyles] = useState({
     color: '#FFF',
     background: '#228A95'
@@ -70,111 +73,115 @@ const DataReview = () => {
       desiredValue: value,
       contract: contract,
       paytype: paytype,
+      status: 'Aguardando',
       totalLoan: (value + (value * (currentInstallment.comission / 100))).toFixed(2),
       installmentId: table.installmentId,
       tableId: table.id,
     }).then(res => {
       dispatch(setCurrentSolicitation(res.data._id, 'SET_CURRENT_SOLICITATION'));
       dispatch(setStep(6, 'SET_STEP'));
+      setLoading(false);
     }).catch(err => {
       console.log(err);
     });
   }
 
   return (
-    <DataReviewContainer>
-      <header>
-        <div>
-          <img src={add} alt='Add' />
-          <img src={box} alt='Simulation' />
-          <h1>Solicitar Empréstimo</h1>
-        </div>
-        <div>
-          <label>Tabela</label>
-          <input type='text' value={currentTable.name} />
-        </div>
-      </header>
-      <section>
-        <div>
+    <Spin spinning={loading} size='large'>
+      <DataReviewContainer>
+        <header>
           <div>
-            <label>Valor desejado</label>
-            <input type='text' value={`R$ ${value.toFixed()}`} />
+            <img src={add} alt='Add' />
+            <img src={box} alt='Simulation' />
+            <h1>Solicitar Empréstimo</h1>
           </div>
           <div>
-            <label>Parcelas</label>
-            <input type='text' value={currentInstallment.installments} />
+            <label>Tabela</label>
+            <input type='text' value={currentTable.name} />
           </div>
-        </div>
-        <div>
+        </header>
+        <section>
           <div>
-            <label>Valor Total do Empréstimo</label>
-            <input type='text' value={`R$ ${(value + (value * (currentInstallment.comission / 100))).toFixed(2)}`} />
+            <div>
+              <label>Valor desejado</label>
+              <input type='text' value={`R$ ${value.toFixed()}`} />
+            </div>
+            <div>
+              <label>Parcelas</label>
+              <input type='text' value={currentInstallment.installments} />
+            </div>
           </div>
           <div>
-            <label>Valor da Parcela</label>
-            <input type='text' value={`R$ ${((value / currentInstallment.installments) + (value / currentInstallment.installments * (currentInstallment.comission / 100))).toFixed(2)}`} />
+            <div>
+              <label>Valor Total do Empréstimo</label>
+              <input type='text' value={`R$ ${(value + (value * (currentInstallment.comission / 100))).toFixed(2)}`} />
+            </div>
+            <div>
+              <label>Valor da Parcela</label>
+              <input type='text' value={`R$ ${((value / currentInstallment.installments) + (value / currentInstallment.installments * (currentInstallment.comission / 100))).toFixed(2)}`} />
+            </div>
           </div>
-        </div>
-      </section>
-      <form onSubmit={onFinished}>
-        <span>Escolha o tipo de contrato: </span>
-        <div>
+        </section>
+        <form onSubmit={onFinished}>
+          <span>Escolha o tipo de contrato: </span>
           <div>
-            <button type='button' onClick={() => {
-              setBtnAutoStyles({
-                color: '#FFF',
-                background: '#228A95'
-              });
-              setBtnManuStyles({
-                color: '#228A95',
-                background: '#FFF'
-              })
-              dispatch(setTypeContract('AUTO', 'SET_CONTRACT'));
-            }} style={btnAutoStyles}>Automático</button>
-            <button type='button' onClick={() => {
-              dispatch(setTypeContract('MANU', 'SET_CONTRACT'));
-              setBtnAutoStyles({
-                color: '#228A95',
-                background: '#FFF'
-              });
-              setBtnManuStyles({
-                color: '#FFF',
-                background: '#228A95'
-              })
-            }} style={btnManuStyles}>Manual</button>
-          </div>
-          <button>
-            <img src={confirm} alt='Confirmar' />
+            <div>
+              <button type='button' onClick={() => {
+                setBtnAutoStyles({
+                  color: '#FFF',
+                  background: '#228A95'
+                });
+                setBtnManuStyles({
+                  color: '#228A95',
+                  background: '#FFF'
+                })
+                dispatch(setTypeContract('AUTO', 'SET_CONTRACT'));
+              }} style={btnAutoStyles}>Automático</button>
+              <button type='button' onClick={() => {
+                dispatch(setTypeContract('MANU', 'SET_CONTRACT'));
+                setBtnAutoStyles({
+                  color: '#228A95',
+                  background: '#FFF'
+                });
+                setBtnManuStyles({
+                  color: '#FFF',
+                  background: '#228A95'
+                })
+              }} style={btnManuStyles}>Manual</button>
+            </div>
+            <button>
+              <img src={confirm} alt='Confirmar' />
             Confirmar
           </button>
-        </div>
-      </form>
-      <article>
-        <table>
-          <th colSpan={5}>
-            {currentTable.name}
-          </th>
-          <tbody>
-            <th>Parcela</th>
-            <th>Juros da Parcela</th>
-            <th>Valor da Parcela</th>
-            <th>Valor Total</th>
-            <th>Comissão Parceiro</th>
-          </tbody>
-          {
-            currentTable.installments.map(installment => (
-              <tr key={installment.id}>
-                <td>{installment.installments}</td>
-                <td>{installment.installmentInterest} %</td>
-                <td>{getValueInstallment(value, installment)}</td>
-                <td>{getValueTotalMoreComission(value, installment)}</td>
-                <td>{getValueComission(value, installment)}</td>
-              </tr>
-            ))
-          }
-        </table>
-      </article>
-    </DataReviewContainer >
+          </div>
+        </form>
+        <article>
+          <table>
+            <th colSpan={5}>
+              {currentTable.name}
+            </th>
+            <tbody>
+              <th>Parcela</th>
+              <th>Juros da Parcela</th>
+              <th>Valor da Parcela</th>
+              <th>Valor Total</th>
+              <th>Comissão Parceiro</th>
+            </tbody>
+            {
+              currentTable.installments.map(installment => (
+                <tr key={installment.id}>
+                  <td>{installment.installments}</td>
+                  <td>{installment.installmentInterest} %</td>
+                  <td>{getValueInstallment(value, installment)}</td>
+                  <td>{getValueTotalMoreComission(value, installment)}</td>
+                  <td>{getValueComission(value, installment)}</td>
+                </tr>
+              ))
+            }
+          </table>
+        </article>
+      </DataReviewContainer>
+    </Spin>
   );
 }
 

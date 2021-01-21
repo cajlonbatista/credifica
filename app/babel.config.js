@@ -11,6 +11,13 @@ module.exports = {
                 "preprocess": false
             },
             "inline-svg-react"
+        ],
+        [
+            "import", {
+                "libraryName": "antd",
+                "style": true
+            },
         ]
+
     ],
 }

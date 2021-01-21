@@ -26,7 +26,7 @@ export interface CARD{
 }
 
 const INITIAL = {
-  step: 6,
+  step: 1,
   value: 0,
   client: '',
   url: null,
