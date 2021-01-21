@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from 'react';
 
-import axios from 'axios';
-
 import { setDetails, setStep, setValue } from '../../store/actions/actions';
+import { getValueComission, getValueInstallment, getValueTotalMoreComission } from '../../utils/functions/finances';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import { SimulTaxasContainer, TableContainer } from './styles';
 
@@ -161,9 +161,9 @@ const SimulTaxas = () => {
                           }}>
                             <td>{installment.installments}</td>
                             <td>{installment.installmentInterest} %</td>
-                            <td>{((price / installment.installments) + (price / installment.installments * (installment.comission / 100))).toFixed(2)}</td>
-                            <td>{(price + (price * (installment.comission / 100))).toFixed(2)}</td>
-                            <td>{(price * (installment.comission / 100)).toFixed(2)}</td>
+                            <td>{getValueInstallment(price, installment)}</td>
+                            <td>{getValueTotalMoreComission(price, installment)}</td>
+                            <td>{getValueComission(price, installment)}</td>
                           </tr>
                           :
                           <tr key={installment.id} onClick={e => {
@@ -179,9 +179,9 @@ const SimulTaxas = () => {
                           }>
                             <td>{installment.installments}</td>
                             <td>{installment.installmentInterest} %</td>
-                            <td>{((price / installment.installments) + (price / installment.installments * (installment.comission / 100))).toFixed(2)}</td>
-                            <td>{(price + (price * (installment.comission / 100))).toFixed(2)}</td>
-                            <td>{(price * (installment.comission / 100)).toFixed(2)}</td>
+                            <td>{getValueInstallment(price, installment)}</td>
+                            <td>{getValueTotalMoreComission(price, installment)}</td>
+                            <td>{getValueComission(price, installment)}</td>
                           </tr>
                       ))
                     }

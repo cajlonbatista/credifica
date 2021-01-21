@@ -26,7 +26,7 @@ export interface CARD{
 }
 
 const INITIAL = {
-  step: 1,
+  step: 6,
   value: 0,
   client: '',
   url: null,
@@ -46,6 +46,7 @@ const INITIAL = {
 };
 
 const reducer = (state: APP = INITIAL, action: AnyAction) => {
+
   switch (action.type) {
     case HYDRATE:
       return { ...state, ...action.payload };
@@ -67,6 +68,8 @@ const reducer = (state: APP = INITIAL, action: AnyAction) => {
       return { ...state, value: action.payload };
     case 'SET_CONTRACT':      
       return { ...state, contract: action.payload };
+    case 'SET_CURRENT_SOLICITATION':
+      return { ...state, currentSolicitation: action.payload };
     default:
       return state;
   }

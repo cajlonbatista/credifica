@@ -2,16 +2,16 @@ import React, { FormEvent, useEffect, useState } from 'react';
 
 import axios from 'axios';
 import { APP } from '../../store/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { Table } from '../SimulTaxas/SimulTaxas';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentSolicitation, setStep, setTypeContract } from '../../store/actions/actions';
 
 import { DataReviewContainer } from './styles';
-import { TableContainer } from '../SimulTaxas/styles';
 
 import confirm from '../../assets/svg/confirm.svg';
 import add from '../../assets/svg/add.svg';
 import box from '../../assets/svg/box.svg';
-import { setStep, setTypeContract } from '../../store/actions/actions';
+import { getValueComission, getValueInstallment, getValueTotalMoreComission } from '../../utils/functions/finances';
 
 const DataReview = () => {
   const [btnAutoStyles, setBtnAutoStyles] = useState({
@@ -35,7 +35,7 @@ const DataReview = () => {
   });
 
   const dispatch = useDispatch();
-  const { value, table } = useSelector<APP, APP>(state => {
+  const { value, table, url, client, paytype, card, contract, assets } = useSelector<APP, APP>(state => {
     return state;
   });
 
@@ -53,13 +53,32 @@ const DataReview = () => {
           }
         }
       }
-
     }).catch(err => console.log(err))
   }, []);
 
   const onFinished = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();    
-    dispatch(setStep(6, 'SET_STEP'));
+    e.preventDefault();
+
+    axios.post(`${url}api/solicitation`, {
+      clientId: client,
+      assets: assets,
+      installmentInterest: currentInstallment.installmentInterest,
+      comission: currentInstallment.comission,
+      comissionValue: ((value * (currentInstallment.comission / 100))).toFixed(2),
+      installmentInterestValue: ((value * (currentInstallment.installmentInterest / 100))).toFixed(2),
+      cardDetails: card,
+      desiredValue: value,
+      contract: contract,
+      paytype: paytype,
+      totalLoan: (value + (value * (currentInstallment.comission / 100))).toFixed(2),
+      installmentId: table.installmentId,
+      tableId: table.id,
+    }).then(res => {
+      dispatch(setCurrentSolicitation(res.data._id, 'SET_CURRENT_SOLICITATION'));
+      dispatch(setStep(6, 'SET_STEP'));
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   return (
@@ -121,7 +140,7 @@ const DataReview = () => {
               setBtnManuStyles({
                 color: '#FFF',
                 background: '#228A95'
-              })              
+              })
             }} style={btnManuStyles}>Manual</button>
           </div>
           <button>
@@ -147,9 +166,9 @@ const DataReview = () => {
               <tr key={installment.id}>
                 <td>{installment.installments}</td>
                 <td>{installment.installmentInterest} %</td>
-                <td>{((value / installment.installments) + (value / installment.installments * (installment.comission / 100))).toFixed(2)}</td>
-                <td>{(value + (value * (installment.comission / 100))).toFixed(2)}</td>
-                <td>{(value * (installment.comission / 100)).toFixed(2)}</td>
+                <td>{getValueInstallment(value, installment)}</td>
+                <td>{getValueTotalMoreComission(value, installment)}</td>
+                <td>{getValueComission(value, installment)}</td>
               </tr>
             ))
           }

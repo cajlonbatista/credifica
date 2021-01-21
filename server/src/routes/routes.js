@@ -9,6 +9,8 @@ routes.get('/client', clientsController.show);
 routes.get('/client/:cpf', clientsController.index);
 
 routes.post('/solicitation', solicitationController.create);
+routes.get('/solicitation/:id', solicitationController.index);
+
 
 routes.post('/model', Models.create);
 routes.get('/model', Models.show);

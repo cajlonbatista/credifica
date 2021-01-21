@@ -71,3 +71,10 @@ export const setTypeContract = (payload: string, type: string) => {
     payload: payload,
   }
 }
+
+export const setCurrentSolicitation = (payload: string, type: string) => {
+  return {
+    type: type,
+    payload: payload,
+  }
+}

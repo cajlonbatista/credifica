@@ -14,6 +14,10 @@ const SolicitationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  contract: {
+    type: String,
+    required: true,
+  },
   comissionValue: {
     type: Number,
     required: true,
@@ -22,9 +26,19 @@ const SolicitationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  cardNumber: {
-    type: String,
-    required: true,
+  cardDetails: {
+    number: {
+      type: String,
+      required: true,
+    },
+    cvc: {
+      type: String,
+      required: true,
+    },
+    validate: {
+      type: String,
+      required: true,
+    }
   },
   desiredValue: {
     type: Number,
@@ -38,7 +52,7 @@ const SolicitationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rateTableId: {
+  tableId: {
     type: String,
     required: true,
   },
@@ -46,12 +60,20 @@ const SolicitationSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  paytype: {
+    type: String,
+    required: true,
+  },
   assets: [
     {
-      title: { type: String, required: true },
-      file: { type: String, required: true },
+      title: { type: String, required: false },
+      file: { type: String, required: false },
     }
   ],
+  createdAt: {
+    type: Date,
+    default:  Date.now
+  },
 });
 
 SolicitationSchema.plugin(mongoosePaginate);

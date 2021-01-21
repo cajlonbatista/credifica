@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb'}));
 
-mongoose.connect(`mongodb+srv://cajlonbatista:cajlon4321@spacenews.uyvba.mongodb.net/klutch?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb://127.0.0.1:27017/klutch`, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
