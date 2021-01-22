@@ -66,7 +66,7 @@ const Main = ({ solicitations }) => {
 
 export default Main;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await axios.get(`${process.env.URL_API}api/solicitations`);
   if (!response.data) {
     return {
@@ -80,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       solicitations: response.data,  
-    }
+    },
+    revalidate: 1,
   }
 }
