@@ -1,5 +1,3 @@
-## Credifica
-
 ## :page_with_curl: About
 
 I was challenged to develop a part of the flow of a loan system, basically the registration part of a loan application and the visualization of it.

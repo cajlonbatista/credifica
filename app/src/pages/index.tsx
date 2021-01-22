@@ -14,8 +14,8 @@ import alert from '../assets/svg/alert.svg';
 import checked from '../assets/svg/checked.svg';
 
 const Main = ({ solicitations }) => {
-  const router = useRouter();
-  if (solicitations.length == undefined) {
+  const router  = useRouter();
+  if (solicitations == undefined) {
     return (
       <div>
         <Header />
@@ -70,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const response = await axios.get(`${process.env.URL_API}api/solicitations`);
   return {
     props: {
-      solicitations: response.data,
-    },
+      solicitations: response.data,  
+    }
   }
 }
