@@ -61,7 +61,7 @@ const DataReview = () => {
 
   const onFinished = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setLoading(true);
     axios.post(`${url}api/solicitation`, {
       clientId: client,
       assets: assets,

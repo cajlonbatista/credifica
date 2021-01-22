@@ -223,11 +223,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = [];
   const response = await axios.get(`${process.env.URL_API}api/solicitation`);
   const solicitations = response.data;
-
-  for (const solicitation of solicitations) {
-    paths.push({ params: solicitation });
+  if (response.data.length != 0) {
+    for (const solicitation of solicitations) {
+      paths.push({ params: solicitation });
+    }
+  } else {
+    
   }
-
+  
   return {
     paths: paths,
     fallback: true,
@@ -247,7 +250,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       client: client.data,
       url: process.env.URL_API
     },
-    revalidate: 2
+    revalidate: 1
   }
 }
 
