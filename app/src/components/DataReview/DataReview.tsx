@@ -78,12 +78,14 @@ const DataReview = () => {
       installmentId: table.installmentId,
       tableId: table.id,
     }).then(res => {
+      setLoading(false);
       dispatch(setCurrentSolicitation(res.data._id, 'SET_CURRENT_SOLICITATION'));
       dispatch(setStep(6, 'SET_STEP'));
-      setLoading(false);
     }).catch(err => {
       console.log(err);
+      setLoading(false);
     });
+    setLoading(false);
   }
 
   return (
