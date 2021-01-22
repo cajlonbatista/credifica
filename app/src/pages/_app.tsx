@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from '../styles/global/global';
 import theme from '../themes/theme';
-import '../styles/less/antd.less';
+import '../styles/antd/antd.css';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
