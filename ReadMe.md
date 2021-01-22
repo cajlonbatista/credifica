@@ -1,15 +1,30 @@
 ## Credifica
 
-## :hammer: Technologies
+## :page_with_curl: About
 
-Este projeto foi desenvolvido com as seguintes tecnologias:
+I was challenged to develop a part of the flow of a loan system, basically the registration part of a loan application and the visualization of it.
+
+The challenge descriptions are available at this link
+The Front End of the application made in Next.js is hosted [here](https://credifica.vercel.app/)
+The application's Back End was done in Node.js with Express and MongoDB, and is hosted [here](https://credifica.herokuapp.com/)
+
+## :hammer: Technologies
+This project was developed with the following technologies:
+
 - [react](https://pt-br.reactjs.org/)
 - [react-loadingg](https://www.npmjs.com/package/react-loading)
 - [axios](https://github.com/axios/axios)
 - [styled-components](https://styled-components.com/)
-- [next](https://styled-components.com/)
+- [next](https://nextjs.org/)
+- [next-images](https://www.npmjs.com/package/next-images)
+- [redux](https://www.npmjs.com/package/redux)
 - [@material-ui/core](https://www.npmjs.com/package/@material-ui/core)
 - [antd](https://ant.design/docs/react/use-with-create-react-app)
+- [react-input-mask](https://www.npmjs.com/package/react-input-mask)
+- [react-redux](https://www.npmjs.com/package/react-redux)
+- [react-input-mask](https://www.npmjs.com/package/react-input-mask)
+- [typescript](https://www.npmjs.com/package/typescript)
+- [next-redux-wrapper](https://www.npmjs.com/package/next-redux-wrapper)
 
 ## :books: Requirements
  - Have [**Git**](https://git-scm.com/) to clone the project.
