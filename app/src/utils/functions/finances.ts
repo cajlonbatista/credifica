@@ -34,6 +34,21 @@ export const getValueComission = (price: number, installment: INSTALLMENT) => {
   return newValue;
 } 
 
+export const formatValue = (value: number) => {
+  const formated =  value.toString();
+  var newValue = '';
+
+  for (const n of formated) {
+    if (n == '.') {
+      newValue += ',';
+    } else {
+      newValue += n;
+    }
+  }
+  
+  return newValue;
+}
+
 export const getValueTotalMoreComission = (price: number, installment: INSTALLMENT) => {
   const value = (price + (price * (installment.comission / 100))).toFixed(2).toString();
   var newValue = '';

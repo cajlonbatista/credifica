@@ -5,9 +5,9 @@ import { wrapper } from '../store/store';
 
 import { ThemeProvider } from 'styled-components';
 
-import GlobalStyle from '../styles/global';
+import GlobalStyle from '../styles/global/global';
 import theme from '../themes/theme';
-import '../styles/antd.less';
+import '../styles/less/antd.less';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (

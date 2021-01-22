@@ -1,7 +1,9 @@
 const withSass = require('@zeit/next-sass');
 const withLess = require('@zeit/next-less');
-const lessToJS = require('less-vars-to-js')
+const lessToJS = require('less-vars-to-js');
+
 const withImages = require('next-images');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -10,8 +12,9 @@ const isProd = process.env.NODE_ENV === 'production'
 if (typeof require !== 'undefined') {
   require.extensions['.less'] = file => { }
 }
+
 const theme = lessToJS(
-  fs.readFileSync(path.resolve(__dirname, './src/styles/antd.less'), 'utf8')
+  fs.readFileSync(path.resolve(__dirname, './src/styles/less/antd.less'), 'utf8')
 )
 
 
@@ -45,4 +48,4 @@ module.exports = withLess(withSass({
       return config
     },
   })
-}))
+}));

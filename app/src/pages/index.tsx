@@ -1,30 +1,67 @@
 import React from 'react';
-import { InferGetStaticPropsType } from 'next';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 
-import { APP, wrapper } from '../store/store';
-import { setUrl } from '../store/actions/actions';
-import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { formatValue } from '../utils/functions/finances';
 
 import Header from '../components/Header/Header';
-import Steps from '../components/Steps/Steps';
 
 import { MainContainer } from '../styles/index.styles';
 
-const Home = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { step } = useSelector<APP, APP>(state => state);
+import alert from '../assets/svg/alert.svg';
+import checked from '../assets/svg/checked.svg';
 
+const Main = ({ solicitations }) => {
+  const router = useRouter();
   return (
     <MainContainer>
       <Header />
-      <Steps step={step} />
+      <main>
+        {
+          solicitations.map(solicitation => (
+            <div onClick={e => router.push(`/solicitation/${solicitation._id}`)}>
+              <h1>R$ {formatValue(solicitation.desiredValue)}</h1>
+              <h1>Cliente: {solicitation.clientId}</h1>
+              <h1>{new Date(solicitation.createdAt).toLocaleDateString()}</h1>
+              {
+                (solicitation.status === 'Aguardando')
+                  ?
+                  <>
+                    <button style={{ background: '#EF9C4B' }}>
+                      <img src={alert} alt='Waiting' />
+                      Aguardando
+                    </button>
+                  </>
+                  :
+                  (solicitation.status == 'Aprovada')
+                    ?
+                    <button style={{ background: '#228A95' }}>
+                      <img src={checked} alt='Checked' />
+                      {solicitation.status}
+                    </button>
+                    :
+                    <button style={{ background: '#BC3434' }}>
+                      <img src={alert} alt='Alert' />
+                      {solicitation.status}
+                    </button>
+              }
+            </div>
+          ))
+        }
+      </main>
     </MainContainer>
   );
 }
 
-export const getStaticProps = wrapper.getStaticProps(
-  async ({ store }) => {       
-    store.dispatch(setUrl(process.env.URL_API, 'SET_URL'));
-  }
-);
+export default Main;
 
-export default Home;
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await axios.get(`${process.env.URL_API}api/solicitations`);
+  return {
+    props: {
+      solicitations: response.data,
+    },
+    revalidate: 1,
+  }
+}

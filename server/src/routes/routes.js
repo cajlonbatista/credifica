@@ -11,7 +11,8 @@ routes.put('/client/:cpf', clientsController.update);
 routes.post('/solicitation', solicitationController.create);
 routes.get('/solicitation/:id', solicitationController.index);
 routes.put('/solicitation/:id', solicitationController.update);
-
 routes.get('/solicitation', solicitationController.show);
+routes.get('/solicitations', solicitationController.all);
+
 
 module.exports = routes;

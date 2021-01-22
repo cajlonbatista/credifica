@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import axios from 'axios';
-import { APP } from '../../store/store';
-import { useSelector } from 'react-redux';
+import { CircleLoading } from 'react-loadingg';
 import { Table } from '../../components/SimulTaxas/SimulTaxas';
 import { getValueInstallment } from '../../utils/functions/finances';
 
@@ -22,7 +21,7 @@ import checked from '../../assets/svg/checked.svg';
 
 
 const Solicitation = ({ solicitation, client, url }) => {
-  const { isFallback, query } = useRouter();
+  const { isFallback, query, push } = useRouter();
 
   const { id } = query;
 
@@ -63,14 +62,14 @@ const Solicitation = ({ solicitation, client, url }) => {
     axios.put(`${url}api/solicitation/${id}`, {
       status: 'Aprovada',
     }).then(res => {
-      Router.reload();
+      push('/');
     }).catch(err => console.log(err));
   }
   const failSolicitation = () => {
     axios.put(`${url}api/solicitation/${id}`, {
       status: 'Reprovada',
     }).then(res => {
-      Router.reload();
+      push('/');
     }).catch(err => console.log(err));
   }
 
@@ -91,7 +90,12 @@ const Solicitation = ({ solicitation, client, url }) => {
   }, []);
 
   if (isFallback) {
-    return <div></div>
+    return (
+      <div>
+        <Header />
+        <CircleLoading />
+      </div>
+    );
   } else {
     const { desiredValue, comissionValue, assets } = solicitation;
     return (
@@ -178,7 +182,7 @@ const Solicitation = ({ solicitation, client, url }) => {
                   (solicitation.status === 'Aguardando')
                     ?
                     <>
-                      <button style={{ background: '#EF9C4B' }}>
+                      <button style={{ background: '#EF9C4B', cursor: 'default', outline: 'none' }}>
                         <img src={alert} alt='Waiting' />
                       Aguardando
                     </button>
@@ -194,18 +198,18 @@ const Solicitation = ({ solicitation, client, url }) => {
                     :
                     (solicitation.status == 'Aprovada')
                       ?
-                      <button style={{ background: '#228A95' }}>
+                      <button style={{ background: '#228A95', cursor: 'default', outline: 'none' }}>
                         <img src={checked} alt='Checked' />
                         {solicitation.status}
                       </button>
                       :
-                      <button style={{ background: '#BC3434' }}>
+                      <button style={{ background: '#BC3434', cursor: 'default', outline: 'none' }}>
                         <img src={alert} alt='Alert' />
                         {solicitation.status}
                       </button>
                 }
               </footer>
-            </section>    
+            </section>
           </section>
         </SolicitationView>
       </>

@@ -14,7 +14,6 @@ const translate = keyframes`
 export const HeaderContainer = styled.header`
   min-height: 59px;
   background-color: ${props => props.theme.colors.primary};
-  animation: ${translate} 0.3s backwards;
   z-index: 10;
   display: flex;
   justify-content: space-between;
@@ -29,3 +28,23 @@ export const HeaderContainer = styled.header`
     cursor: pointer;
   }
 `
+
+export const DrawerContainer = styled.section`
+  width: 300px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  div{
+    font-family: Noto Sans JP, sans-serif;
+    font-size: 14px;
+    color: #FFF;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    transition: all 0.3s;
+    border: 2px solid #FFF;
+    :hover{
+      border-color: #EF9C4B;
+    }
+  }
+`;

@@ -46,5 +46,15 @@ module.exports = {
     } catch (error) {
       return res.status(401).json({ error: error.message });
     }
+  },
+  async all(req, res) {
+    try {
+      const solicitations = await Solicitation.find();
+      solicitations.reverse();
+      return res.status(200).json(solicitations);
+
+    } catch (error) {
+      return res.status(401).json({ error: error.message });
+    }
   }
 };

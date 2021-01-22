@@ -7,7 +7,6 @@ export const SolicitationView = styled.main`
   >header{
     width: 50%;
     display: flex;
-    animation: ${translate} 0.7s backwards;
     animation-delay: 0.3s;
     justify-content: center;
     align-items: center;
@@ -31,6 +30,7 @@ export const SolicitationView = styled.main`
     width: 100%;
     max-width: 1000px;
     margin: 10px auto;
+    animation: ${translate} 0.7s backwards;
     margin-top: 40px!important;
     display: grid;
     grid-template-columns: 1fr 1fr;
