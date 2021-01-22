@@ -20,7 +20,7 @@ const Main = ({ solicitations }) => {
       <main>
         {
           solicitations.map(solicitation => (
-            <div key={solicitation._id} onClick={e => router.push(`/solicitation/${solicitation._id}`)}>
+            <div key={solicitation} onClick={e => router.push(`/solicitation/${solicitation._id}`)}>
               <h1>R$ {formatValue(solicitation.desiredValue)}</h1>
               <h1>Cliente: {solicitation.clientId}</h1>
               <h1>{new Date(solicitation.createdAt).toLocaleDateString()}</h1>
