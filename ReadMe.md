@@ -22,15 +22,31 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
   # Enter the directory:
   $ cd credifica
 ```
-## :gear: Starting
-``` bash
+## :gear: Starting Server
+```bash
+  # Enter the directory:
+  $ cd server
+
   # Install the dependencies:
   $ yarn install
   
+  # Launch an server:
+  $ yarn start
+```
+## :gear: Starting App
+``` bash
+  # Enter the directory:
+  $ cd app
+
+  # Install the dependencies:
+  $ yarn install
+  
+  # Application Production:
+  $ yarn build
+
   # Launch an application:
   $ yarn start
+
  ```
 ## :handshake: Contributors
   - Francisco Cajlon - [cajlonbatista](https://github.com/cajlonbatista)
-  - Eduardo Wesley - [edumudu](https://github.com/edumudu)
-  - Nicole Taufenbach - [nicole-taufenbach](https://github.com/nicole-taufenbach)
