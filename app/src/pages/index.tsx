@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
@@ -20,7 +20,7 @@ const Main = ({ solicitations }) => {
       <main>
         {
           solicitations.map(solicitation => (
-            <div onClick={e => router.push(`/solicitation/${solicitation._id}`)}>
+            <div key={solicitation._id} onClick={e => router.push(`/solicitation/${solicitation._id}`)}>
               <h1>R$ {formatValue(solicitation.desiredValue)}</h1>
               <h1>Cliente: {solicitation.clientId}</h1>
               <h1>{new Date(solicitation.createdAt).toLocaleDateString()}</h1>
@@ -56,12 +56,11 @@ const Main = ({ solicitations }) => {
 
 export default Main;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const response = await axios.get(`${process.env.URL_API}api/solicitations`);
   return {
     props: {
       solicitations: response.data,
     },
-    revalidate: 1,
   }
 }
