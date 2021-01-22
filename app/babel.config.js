@@ -12,12 +12,5 @@ module.exports = {
             },
             "inline-svg-react"
         ],
-        [
-            "import", {
-                "libraryName": "antd",
-                "style": true
-            },
-        ]
-
     ],
 }
