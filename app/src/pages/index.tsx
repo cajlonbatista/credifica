@@ -66,8 +66,17 @@ const Main = ({ solicitations }) => {
 
 export default Main;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const response = await axios.get(`${process.env.URL_API}api/solicitations`);
+  if (!response.data) {
+    return {
+      redirect: {
+        destination: '/add',
+        permanent: false,
+      },
+    }
+  }
+
   return {
     props: {
       solicitations: response.data,  
