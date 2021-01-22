@@ -4,8 +4,10 @@
 
 I was challenged to develop a part of the flow of a loan system, basically the registration part of a loan application and the visualization of it.
 
-The challenge descriptions are available at this link
+The challenge descriptions are available at this [link](https://www.notion.so/Desafio-Dev-Front-End-56add72550184ecd837c479e4ecbcf07)
+
 The Front End of the application made in Next.js is hosted [here](https://credifica.vercel.app/)
+
 The application's Back End was done in Node.js with Express and MongoDB, and is hosted [here](https://credifica.herokuapp.com/)
 
 ## :hammer: Technologies
