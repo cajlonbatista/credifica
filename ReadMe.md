@@ -29,7 +29,6 @@ This project was developed with the following technologies:
 ## :books: Requirements
  - Have [**Git**](https://git-scm.com/) to clone the project.
  - Have [**Node.js**](https://nodejs.org/en/) installed.
- - O
 ## :rocket: Get Started
 ``` bash
   # Clone the project:
@@ -39,13 +38,13 @@ This project was developed with the following technologies:
   $ cd credifica
 ```
 ## 🔑 Environment variables
-APP
+Create file .env.local in ./app and add your necessary content:
   ``` bash
     URL_API=http://localhost:8080
     NODE_ENV=production
   ```
-  SERVER
-  ``` bash
+Create file .env in ./server and add your necessary content:
+``` bash
     PORT=http://localhost:8080
     DB_URL=mongodb+srv://cajlonbatista:cajlon4321@spacenews.uyvba.mongodb.net/klutch?retryWrites=true&w=majority
   ```
